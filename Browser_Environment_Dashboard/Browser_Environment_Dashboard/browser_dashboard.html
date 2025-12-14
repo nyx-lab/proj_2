@@ -1,0 +1,121 @@
+<!--
+README:
+Browser Environment Dashboard
+This webpage uses JavaScript browser objects to display information about the browser, the current webpage, and navigation history. It also allows dynamic styling based on screen width.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Browser Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      transition: background-color 0.3s ease;
+    }
+    header {
+      border-bottom: 2px solid #333;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+    }
+    section {
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #222;
+    }
+    .info {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Student Profile</h1>
+  <p><strong>Complete Name:</strong> Ashley Nicole T. Mañago</p>
+  <p><strong>Sex:</strong> Female</p>
+  <p><strong>Address:</strong> San Francisco, Lagonoy, Camarines Sur</p>
+  <p><strong>Course, Year, and Section:</strong> BSIT 2A</p>
+  <p><strong>Name of School:</strong> Partido State University</p>
+  <p><strong>Semester and Academic Year:</strong> 2nd Semester AY 2024-2025</p>
+  <p><strong>Subject Code and Title:</strong> PF2 - Event-Driven Proogramming</p>
+  <p><strong>Name of Subject Instructor:</strong> Mr. Arjay Abio</p>
+</header>
+
+<section>
+  <h2>Part A: Browser Information</h2>
+  <div class="info" id="browserInfo"></div>
+</section>
+
+<section>
+  <h2>Part B: Page Information and Controls</h2>
+  <div class="info">
+    <p>URL: <span id="url"></span></p>
+    <p>Hostname: <span id="hostname"></span></p>
+    <p>Page Title: <span id="pageTitle"></span></p>
+    <button onclick="changeTitle()">Change Page Title</button>
+  </div>
+</section>
+
+<section>
+  <h2>Part C: Navigation Controls</h2>
+  <div class="info">
+    <button onclick="window.location.reload()">Reload Page</button>
+    <button onclick="window.location.href='https://www.youtube.com'">Go to youtube.com</button>
+    <button onclick="window.history.back()">Go Back</button>
+    <button onclick="window.history.forward()">Go Forward</button>
+  </div>
+</section>
+
+<script>
+// Part A: Browser and Screen Info
+function displayBrowserInfo() {
+  const info = document.getElementById("browserInfo");
+  info.innerHTML = `
+    <p><strong>Browser:</strong> ${navigator.appName} ${navigator.appVersion}</p>
+    <p><strong>Platform:</strong> ${navigator.platform}</p>
+    <p><strong>Java Enabled:</strong> ${navigator.javaEnabled()}</p>
+    <p><strong>Screen Resolution:</strong> ${screen.width} x ${screen.height}</p>
+    <p><strong>Available Screen Size:</strong> ${screen.availWidth} x ${screen.availHeight}</p>
+    <p><strong>Color Depth:</strong> ${screen.colorDepth}</p>
+  `;
+}
+
+// Part B: Page Info
+document.getElementById("url").textContent = window.location.href;
+document.getElementById("hostname").textContent = window.location.hostname;
+document.getElementById("pageTitle").textContent = document.title;
+
+function changeTitle() {
+  const newTitle = prompt("Enter a new page title:");
+  if (newTitle) {
+    document.title = newTitle;
+    document.getElementById("pageTitle").textContent = newTitle;
+  }
+}
+
+// Part D: Dynamic Styling
+function updateBackgroundColor() {
+  const width = window.innerWidth;
+  if (width < 600) {
+    document.body.style.backgroundColor = "blue";
+  } else if (width < 991) {
+    document.body.style.backgroundColor = "green";
+  } else {
+    document.body.style.backgroundColor = "orange";
+  }
+}
+
+window.onload = () => {
+  displayBrowserInfo();
+  updateBackgroundColor();
+};
+
+window.onresize = updateBackgroundColor;
+</script>
+
+</body>
+</html>
